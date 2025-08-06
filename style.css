@@ -1,0 +1,578 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    padding: 120px 0 80px;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 50%, rgba(51, 65, 85, 0.85) 100%);
+    backdrop-filter: blur(20px);
+    margin: 0 -32px 80px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.02) 50%, transparent 70%),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.03)"/><circle cx="80" cy="80" r="1" fill="rgba(255,255,255,0.02)"/><circle cx="50" cy="50" r="0.5" fill="rgba(255,255,255,0.04)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    animation: shimmer 8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.main-title {
+    font-size: 5rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    letter-spacing: -3px;
+    position: relative;
+}
+
+.main-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
+
+.subtitle {
+    font-size: 1.75rem;
+    font-weight: 300;
+    margin-bottom: 12px;
+    font-style: italic;
+    opacity: 0.9;
+    letter-spacing: 1px;
+}
+
+.tagline {
+    font-size: 1.25rem;
+    font-weight: 400;
+    opacity: 0.8;
+    max-width: 700px;
+    margin: 0 auto;
+    letter-spacing: 0.5px;
+}
+
+/* Plant Info Section */
+.plant-info {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 60px;
+    margin-bottom: 100px;
+    align-items: center;
+}
+
+.plant-image-container {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    transform: rotate(-3deg);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+}
+
+.plant-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 1;
+}
+
+.plant-image-container:hover {
+    transform: rotate(0deg) scale(1.05);
+    box-shadow: 
+        0 35px 70px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.plant-image-container:hover::before {
+    opacity: 1;
+}
+
+.plant-image {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.plant-image-container:hover .plant-image {
+    transform: scale(1.1);
+}
+
+.plant-description {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.plant-description h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 32px;
+    position: relative;
+    letter-spacing: -1px;
+}
+
+.plant-description h2::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #38bdf8, #8b5cf6);
+    border-radius: 2px;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
+
+.plant-description p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #e2e8f0;
+    text-align: justify;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 60px;
+    color: #f8fafc;
+    position: relative;
+    letter-spacing: -1px;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.3), transparent);
+    z-index: -1;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #38bdf8, #8b5cf6);
+    border-radius: 2px;
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
+}
+
+/* Benefits Section */
+.benefits-section {
+    margin-bottom: 100px;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 32px;
+}
+
+.benefit-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #38bdf8, #8b5cf6);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.benefit-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    border-color: rgba(56, 189, 248, 0.3);
+}
+
+.benefit-card:hover::before {
+    transform: scaleX(1);
+}
+
+.benefit-card:hover::after {
+    opacity: 1;
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    position: relative;
+    z-index: 1;
+}
+
+.benefit-card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #f8fafc;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.3px;
+}
+
+.benefit-card p {
+    color: #cbd5e1;
+    line-height: 1.7;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.2px;
+}
+
+/* Care Section */
+.care-section {
+    margin-bottom: 100px;
+}
+
+.care-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 32px;
+}
+
+.care-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.care-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, #8b5cf6, #38bdf8);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.care-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(56, 189, 248, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.care-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.care-card:hover::before {
+    transform: scaleY(1);
+}
+
+.care-card:hover::after {
+    opacity: 1;
+}
+
+.care-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #38bdf8, #8b5cf6);
+    color: white;
+    border-radius: 50%;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+    box-shadow: 
+        0 8px 20px rgba(56, 189, 248, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.care-card h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #f8fafc;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.3px;
+}
+
+.care-card p {
+    color: #cbd5e1;
+    line-height: 1.7;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.2px;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 60px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    font-size: 0.95rem;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(20px);
+    margin: 0 -32px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 24px;
+    }
+    
+    .header {
+        margin: 0 -24px 80px;
+    }
+    
+    .footer {
+        margin: 0 -24px;
+    }
+    
+    .main-title {
+        font-size: 4rem;
+    }
+    
+    .benefits-grid,
+    .care-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .plant-info {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .plant-image-container {
+        transform: none;
+        max-width: 450px;
+        margin: 0 auto;
+    }
+    
+    .plant-image-container:hover {
+        transform: scale(1.02);
+    }
+    
+    .main-title {
+        font-size: 3rem;
+        letter-spacing: -2px;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    .benefits-grid,
+    .care-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .benefit-card,
+    .care-card {
+        padding: 32px;
+    }
+    
+    .plant-description {
+        padding: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    .header {
+        margin: 0 -20px 60px;
+        padding: 80px 0 60px;
+    }
+    
+    .footer {
+        margin: 0 -20px;
+        padding: 40px 0;
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+        letter-spacing: -1px;
+    }
+    
+    .subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .tagline {
+        font-size: 1.125rem;
+    }
+    
+    .plant-description h2,
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .benefit-card,
+    .care-card {
+        padding: 28px;
+    }
+    
+    .plant-description {
+        padding: 28px;
+    }
+    
+    .benefit-icon {
+        font-size: 2.5rem;
+    }
+    
+    .care-number {
+        width: 45px;
+        height: 45px;
+        font-size: 1.125rem;
+    }
+}
